@@ -26,35 +26,26 @@ const ArticlePreview = props => {
     FAVORITED_CLASS :
     NOT_FAVORITED_CLASS;
 
-  const handleClick = ev => {
+  const heartClicked = ev => {
     ev.preventDefault();
-    if (article.favorited) {
-      props.unfavorite(article.slug);
-    } else {
-      props.favorite(article.slug);
-    }
+    alert("Click not implemented yet!")
   };
 
   return (
     <div className="article-preview">
       <div className="article-meta">
       <Avatar round name={article.aliases[0]} />
-        {/* <Link to={`/@${article.culture}`}>
-          <img src="https://www.istockphoto.com/photo/gerbera-gm171312337-20779342?utm_source=unsplash&utm_medium=affiliate&utm_campaign=srp_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Forange-flower&utm_term=orange%20flower%3A%3Asearch-aggressive-affiliates-v1%3Ab"  />
-        </Link> */}
-
         <div className="info">
           <Link className="author" to={`/characters/${props.index+1}`}>
             {article.aliases[0] ? article.aliases[0] : 'Unkonown'}
           </Link>
           <span className="date">
           {article.gender ? article.gender : ''}
-            {/* {new Date(article.createdAt).toDateString()} */}
           </span>
         </div>
 
         <div className="pull-xs-right">
-          <button className={favoriteButtonClass} >
+          <button className={favoriteButtonClass} onClick={heartClicked} >
             <i className="ion-heart"></i>
           </button>
         </div>

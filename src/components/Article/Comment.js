@@ -1,22 +1,11 @@
-import DeleteButton from './DeleteButton';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import Avatar from 'react-avatar';
 
 const Comment = props => {
   const comment = props.comment;
-  const show = props.currentUser &&
-    props.currentUser.username === comment.author.username;
   return (
     <div className="card">
-      <div className="card-block">
-        {comment.books.map((article, index) => (
-          
-            <p className="card-text">{article}</p>
-          
-        ))}
-        
-      </div>
       <div className="card-footer">
         {/* <Link
           to={`/@${comment.aliases[0]}`}
@@ -30,10 +19,9 @@ const Comment = props => {
           className="comment-author">
           {comment.aliases[0]}
         </Link>
-        <span className="date-posted">
+        <span className="date-posted" style={{position: 'absolute',top: '43%',right: '10px'}}>
           {new Date().toDateString()}
         </span>
-        <DeleteButton show={show} slug={props.slug} commentId={comment.id} />
       </div>
     </div>
   );
