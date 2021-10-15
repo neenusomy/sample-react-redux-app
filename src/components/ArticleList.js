@@ -1,5 +1,4 @@
 import ArticlePreview from './ArticlePreview';
-import ListPagination from './ListPagination';
 import React from 'react';
 
 const ArticleList = props => {
@@ -12,7 +11,7 @@ const ArticleList = props => {
   if (props.articles.length === 0) {
     return (
       <div className="article-preview">
-        No articles are here... yet.
+        No characters are here... yet.
       </div>
     );
   }
@@ -20,17 +19,12 @@ const ArticleList = props => {
   return (
     <div>
       {
-        props.articles.map(article => {
+        props.articles[0].map((article,index) => {
           return (
-            <ArticlePreview article={article} key={article.slug} />
+            <ArticlePreview article={article} index={index} key={article.slug} />
           );
         })
       }
-
-      <ListPagination
-        pager={props.pager}
-        articlesCount={props.articlesCount}
-        currentPage={props.currentPage} />
     </div>
   );
 };

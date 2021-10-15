@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import agent from '../agent';
 import { connect } from 'react-redux';
 import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../constants/actionTypes';
+import Avatar from 'react-avatar'
 
 const FAVORITED_CLASS = 'btn btn-sm btn-primary';
 const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
+
 
 const mapDispatchToProps = dispatch => ({
   favorite: slug => dispatch({
@@ -24,54 +26,32 @@ const ArticlePreview = props => {
     FAVORITED_CLASS :
     NOT_FAVORITED_CLASS;
 
-  const handleClick = ev => {
+  const heartClicked = ev => {
     ev.preventDefault();
-    if (article.favorited) {
-      props.unfavorite(article.slug);
-    } else {
-      props.favorite(article.slug);
-    }
+    alert("Click not implemented yet!")
   };
 
   return (
     <div className="article-preview">
       <div className="article-meta">
-        <Link to={`/@${article.author.username}`}>
-          <img src={article.author.image} alt={article.author.username} />
-        </Link>
-
+      <Avatar round name={article.aliases[0]} />
         <div className="info">
-          <Link className="author" to={`/@${article.author.username}`}>
-            {article.author.username}
+          <Link className="author" to={`/characters/${props.index+1}`}>
+            {article.aliases[0] ? article.aliases[0] : 'Unkonown'}
           </Link>
           <span className="date">
-            {new Date(article.createdAt).toDateString()}
+          {article.gender ? article.gender : ''}
           </span>
         </div>
 
         <div className="pull-xs-right">
-          <button className={favoriteButtonClass} onClick={handleClick}>
-            <i className="ion-heart"></i> {article.favoritesCount}
+          <button className={favoriteButtonClass} onClick={heartClicked} >
+            <i className="ion-heart"></i>
           </button>
         </div>
       </div>
 
-      <Link to={`/article/${article.slug}`} className="preview-link">
-        <h1>{article.title}</h1>
-        <p>{article.description}</p>
-        <span>Read more...</span>
-        <ul className="tag-list">
-          {
-            article.tagList.map(tag => {
-              return (
-                <li className="tag-default tag-pill tag-outline" key={tag}>
-                  {tag}
-                </li>
-              )
-            })
-          }
-        </ul>
-      </Link>
+     
     </div>
   );
 }
