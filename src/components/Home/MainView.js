@@ -35,7 +35,7 @@ const GlobalFeedTab = props => {
         href=""
         className={ props.tab === 'all' ? 'nav-link active' : 'nav-link' }
         onClick={clickHandler}>
-        Global Feed
+        characters
       </a>
     </li>
   );
@@ -71,14 +71,14 @@ const MainView = props => {
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
 
-          <YourFeedTab
+          {/* <YourFeedTab
             token={props.token}
             tab={props.tab}
-            onTabClick={props.onTabClick} />
+            onTabClick={props.onTabClick} /> */}
 
           <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
 
-          <TagFilterTab tag={props.tag} />
+          {/* <TagFilterTab tag={props.tag} /> */}
 
         </ul>
       </div>

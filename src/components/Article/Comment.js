@@ -1,6 +1,7 @@
 import DeleteButton from './DeleteButton';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import Avatar from 'react-avatar';
 
 const Comment = props => {
   const comment = props.comment;
@@ -9,22 +10,28 @@ const Comment = props => {
   return (
     <div className="card">
       <div className="card-block">
-        <p className="card-text">{comment.body}</p>
+        {comment.books.map((article, index) => (
+          
+            <p className="card-text">{article}</p>
+          
+        ))}
+        
       </div>
       <div className="card-footer">
-        <Link
-          to={`/@${comment.author.username}`}
+        {/* <Link
+          to={`/@${comment.aliases[0]}`}
           className="comment-author">
-          <img src={comment.author.image} className="comment-author-img" alt={comment.author.username} />
-        </Link>
+          <img src={comment.aliases[0]} className="comment-author-img"  />
+        </Link> */}
+        <Avatar name={comment.aliases[0]} />
         &nbsp;
         <Link
-          to={`/@${comment.author.username}`}
+          to={'#'}
           className="comment-author">
-          {comment.author.username}
+          {comment.aliases[0]}
         </Link>
         <span className="date-posted">
-          {new Date(comment.createdAt).toDateString()}
+          {new Date().toDateString()}
         </span>
         <DeleteButton show={show} slug={props.slug} commentId={comment.id} />
       </div>

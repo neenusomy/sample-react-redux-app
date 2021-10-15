@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import agent from '../agent';
 import { connect } from 'react-redux';
 import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../constants/actionTypes';
+import Avatar from 'react-avatar'
 
 const FAVORITED_CLASS = 'btn btn-sm btn-primary';
 const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
+
 
 const mapDispatchToProps = dispatch => ({
   favorite: slug => dispatch({
@@ -36,42 +38,29 @@ const ArticlePreview = props => {
   return (
     <div className="article-preview">
       <div className="article-meta">
-        <Link to={`/@${article.author.username}`}>
-          <img src={article.author.image} alt={article.author.username} />
-        </Link>
+      <Avatar round name={article.aliases[0]} />
+        {/* <Link to={`/@${article.culture}`}>
+          <img src="https://www.istockphoto.com/photo/gerbera-gm171312337-20779342?utm_source=unsplash&utm_medium=affiliate&utm_campaign=srp_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Forange-flower&utm_term=orange%20flower%3A%3Asearch-aggressive-affiliates-v1%3Ab"  />
+        </Link> */}
 
         <div className="info">
-          <Link className="author" to={`/@${article.author.username}`}>
-            {article.author.username}
+          <Link className="author" to={`/characters/${props.index+1}`}>
+            {article.aliases[0] ? article.aliases[0] : 'Unkonown'}
           </Link>
           <span className="date">
-            {new Date(article.createdAt).toDateString()}
+          {article.gender ? article.gender : ''}
+            {/* {new Date(article.createdAt).toDateString()} */}
           </span>
         </div>
 
         <div className="pull-xs-right">
-          <button className={favoriteButtonClass} onClick={handleClick}>
-            <i className="ion-heart"></i> {article.favoritesCount}
+          <button className={favoriteButtonClass} >
+            <i className="ion-heart"></i>
           </button>
         </div>
       </div>
 
-      <Link to={`/article/${article.slug}`} className="preview-link">
-        <h1>{article.title}</h1>
-        <p>{article.description}</p>
-        <span>Read more...</span>
-        <ul className="tag-list">
-          {
-            article.tagList.map(tag => {
-              return (
-                <li className="tag-default tag-pill tag-outline" key={tag}>
-                  {tag}
-                </li>
-              )
-            })
-          }
-        </ul>
-      </Link>
+     
     </div>
   );
 }

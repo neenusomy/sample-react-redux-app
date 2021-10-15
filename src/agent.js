@@ -3,7 +3,7 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'https://conduit.productionready.io/api';
+const API_ROOT = 'https://anapioficeandfire.com/api';
 
 const encode = encodeURIComponent;
 const responseBody = res => res.body;
@@ -38,14 +38,14 @@ const Auth = {
 };
 
 const Tags = {
-  getAll: () => requests.get('/tags')
+  getAll: () => requests.get('/characters')
 };
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = article => Object.assign({}, article, { slug: undefined })
 const Articles = {
   all: page =>
-    requests.get(`/articles?${limit(10, page)}`),
+    requests.get(`/characters?${limit(10, page)}`),
   byAuthor: (author, page) =>
     requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
   byTag: (tag, page) =>
@@ -59,7 +59,7 @@ const Articles = {
   feed: () =>
     requests.get('/articles/feed?limit=10&offset=0'),
   get: slug =>
-    requests.get(`/articles/${slug}`),
+    requests.get(`/characters/${slug}`),
   unfavorite: slug =>
     requests.del(`/articles/${slug}/favorite`),
   update: article =>
@@ -74,7 +74,7 @@ const Comments = {
   delete: (slug, commentId) =>
     requests.del(`/articles/${slug}/comments/${commentId}`),
   forArticle: slug =>
-    requests.get(`/articles/${slug}/comments`)
+    requests.get(`/characters/${slug}`)
 };
 
 const Profile = {

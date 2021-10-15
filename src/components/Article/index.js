@@ -22,7 +22,7 @@ class Article extends React.Component {
   componentWillMount() {
     this.props.onLoad(Promise.all([
       agent.Articles.get(this.props.match.params.id),
-      agent.Comments.forArticle(this.props.match.params.id)
+      // agent.Comments.forArticle(this.props.match.params.id)
     ]));
   }
 
@@ -34,8 +34,9 @@ class Article extends React.Component {
     if (!this.props.article) {
       return null;
     }
+  
 
-    const markup = { __html: marked(this.props.article.body, { sanitize: true }) };
+    // const markup = { __html: marked(this.props.article.body, { sanitize: true }) };
     const canModify = this.props.currentUser &&
       this.props.currentUser.username === this.props.article.author.username;
     return (
@@ -44,7 +45,7 @@ class Article extends React.Component {
         <div className="banner">
           <div className="container">
 
-            <h1>{this.props.article.title}</h1>
+            <h1>{this.props.article[0].culture}</h1>
             <ArticleMeta
               article={this.props.article}
               canModify={canModify} />
@@ -57,9 +58,9 @@ class Article extends React.Component {
           <div className="row article-content">
             <div className="col-xs-12">
 
-              <div dangerouslySetInnerHTML={markup}></div>
+              {/* <div dangerouslySetInnerHTML={markup}></div> */}
 
-              <ul className="tag-list">
+              {/* <ul className="tag-list">
                 {
                   this.props.article.tagList.map(tag => {
                     return (
@@ -71,7 +72,7 @@ class Article extends React.Component {
                     );
                   })
                 }
-              </ul>
+              </ul> */}
 
             </div>
           </div>
